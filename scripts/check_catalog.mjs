@@ -40,6 +40,7 @@ assert.equal(run('allRecords.length'), records.length);
 assert.equal(run('filteredRecords.length'), records.length);
 assert.equal(run('filteredRecords[0].campaign.slug'), data.campaigns[0].slug);
 assert.equal(element('#summaryProducts').textContent, records.length.toLocaleString('zh-CN'));
+assert.match(element('#archiveUpdated').textContent, /^资料更新 · \d{4}\.\d{1,2}\.\d{1,2}$/);
 assert.match(element('#productGrid').innerHTML, /202610a-001/);
 
 for (const slug of ['202609a', '202610a']) {

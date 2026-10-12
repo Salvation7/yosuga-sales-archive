@@ -283,7 +283,7 @@
 <body>
   <header class="shell nav">
     <a class="brand" href="#top" aria-label="返回页首"><span class="brand-mark">空</span><span>缘之空・发售档案</span></a>
-    <div class="nav-meta">LOCAL PREVIEW · 2026.08.15</div>
+    <div class="nav-meta" id="archiveUpdated">销售档案</div>
   </header>
 
   <main id="top" class="shell">
@@ -755,6 +755,8 @@
         const response = await fetch('./campaigns.json', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
+        const updatedDate = new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai' }).format(new Date(data.generatedAt));
+        document.querySelector('#archiveUpdated').textContent = `资料更新 · ${updatedDate.replaceAll('/', '.')}`;
         let sourceIndex = 0;
         allRecords = data.campaigns.flatMap(campaign => campaign.products.map(product => {
           const cnName = translateName(product.name);
